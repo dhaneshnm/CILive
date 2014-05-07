@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'json'
 require 'asciiart'
-source = "http://www.espncricinfo.com/ci/engine/match/706767.json"
+source = "http://www.espncricinfo.com/indian-premier-league-2014/engine/match/733985.json"
 def jsonisque(source)
 	last = nil
 	while(true)
@@ -32,7 +32,11 @@ def jsonisque(source)
 		    puts match_data["live"]["status"]
 			last = comment["overs_unique"]
 		else
-		  system "artii 'waiting for the action'"
+		  runs = match_data["live"]["innings_recent"][0]["runs"]
+ 		  wickets = match_data["live"]["innings_recent"][0]["wickets"]
+    	  display_score = runs+"/"+wickets
+ 		  display_score
+		  system "artii '"+display_score+"'"
 		  puts match_data["match"]["current_summary"]
 		  puts "most recent over : "+recent_over_string(match_data)
 		  puts match_data["live"]["status"]
@@ -51,7 +55,7 @@ def show_umpire(signal)
 end
 def recent_over_string(match_data)
 	recent = ""
-    match_data["live"]["recent_overs"].first.each do |ball|
+    match_data["live"]["recent_overs"].last.each do |ball|
 	actual = "0"
 		if(!ball["ball"].include?('&'))
 	 	 actual = ball["ball"]
