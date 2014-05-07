@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'json'
 require 'asciiart'
-source = "http://www.espncricinfo.com/indian-premier-league-2014/engine/match/733985.json"
+source = "http://www.espncricinfo.com/indian-premier-league-2014/engine/match/733987.json"
 def jsonisque(source)
 	last = nil
 	while(true)
@@ -32,9 +32,9 @@ def jsonisque(source)
 		    puts match_data["live"]["status"]
 			last = comment["overs_unique"]
 		else
-		  runs = match_data["live"]["innings_recent"][0]["runs"]
- 		  wickets = match_data["live"]["innings_recent"][0]["wickets"]
-    	  display_score = runs+"/"+wickets
+		  runs = match_data["live"]["innings"]["runs"]
+ 		  wickets = match_data["live"]["innings"]["wickets"]
+    	  display_score = runs+" for "+wickets
  		  display_score
 		  system "artii '"+display_score+"'"
 		  puts match_data["match"]["current_summary"]
