@@ -30,6 +30,8 @@ class Game
 	        display_score = runs + ' for ' + wickets
 	        system "artii '" + display_score + "'"
 	        last = comment['overs_unique']
+	      else
+	      	print "."
 	      end
 	    else
 	      system "artii 'Event yet to start'"
