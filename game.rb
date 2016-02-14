@@ -9,11 +9,8 @@ class Game
 		jsonisque(source)
 	end
 
-	def self.jsonisque(source)
-	  last = nil
-	  loop do
-	    match_data = JSON.load(open(source))
-	    if !match_data['comms'][0].nil?
+	def self.display_game_info(match_data, last)
+		if !match_data['comms'][0].nil?
 	      comment = match_data['comms'][0]['ball'][0]
 	      runs = match_data['live']['innings']['runs']
 	      wickets = match_data['live']['innings']['wickets']
@@ -33,12 +30,18 @@ class Game
 	        display_score = runs + ' for ' + wickets
 	        system "artii '" + display_score + "'"
 	        last = comment['overs_unique']
-	      else
-	        next
 	      end
 	    else
 	      system "artii 'Event yet to start'"
 	    end
+	    last
+	end
+
+	def self.jsonisque(source)
+	  last = nil
+	  loop do
+	    match_data = JSON.load(open(source))
+	    last = display_game_info(match_data, last)
 	    sleep(0.1)
 	  end
 	end
