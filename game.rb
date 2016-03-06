@@ -79,7 +79,7 @@ class Game
   end
 
   def self.show_umpire(signal)
-    signal_image = signal + '.jpeg'
+    signal_image = 'images/'+ signal + '.jpeg'
     puts AsciiArt.new(signal_image).to_ascii_art
   end
 
