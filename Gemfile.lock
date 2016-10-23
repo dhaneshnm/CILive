@@ -5,6 +5,7 @@ GEM
     asciiart (0.0.9)
       rainbow (= 2.0.0)
       rmagick (= 2.13.4)
+    eventmachine (1.2.0.1)
     rainbow (2.0.0)
     rmagick (2.13.4)
 
@@ -14,6 +15,7 @@ PLATFORMS
 DEPENDENCIES
   artii (~> 2.1, >= 2.1.1)
   asciiart (~> 0.0.9)
+  eventmachine
 
 BUNDLED WITH
-   1.11.2
+   1.12.3

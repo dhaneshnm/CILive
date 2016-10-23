@@ -2,6 +2,7 @@ require 'open-uri'
 require 'json'
 require 'asciiart'
 require './menu.rb'
+require 'eventmachine'
 
 class Game
   def self.start
@@ -37,10 +38,11 @@ class Game
 
   def self.jsonisque(source)
     last = nil
-    loop do
-      match_data = JSON.load(open(source))
-      last = display_game_info(match_data, last)
-      sleep(0.1)
+    EM.run do
+      EM.add_periodic_timer(0.01) do
+        match_data = JSON.load(open(source))
+        last = display_game_info(match_data, last)
+      end
     end
   end
 
@@ -79,7 +81,7 @@ class Game
   end
 
   def self.show_umpire(signal)
-    signal_image = 'images/'+ signal + '.jpeg'
+    signal_image = '../images/'+ signal + '.jpeg'
     puts AsciiArt.new(signal_image).to_ascii_art
   end
 
